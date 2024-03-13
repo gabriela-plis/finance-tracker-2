@@ -8,4 +8,5 @@
          http://www.liquibase.org/xml/ns/mongodb
          http://www.liquibase.org/xml/ns/mongodb/liquibase-mongodb-latest.xsd">
 
+    <includeAll path="./changesets" relativeToChangelogFile="true" />
 </databaseChangeLog>

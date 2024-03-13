@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:mongodb="http://www.liquibase.org/xml/ns/mongodb"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+         http://www.liquibase.org/xml/ns/mongodb
+         http://www.liquibase.org/xml/ns/mongodb/liquibase-mongodb-latest.xsd">
+<changeSet id="1" author="gabriela-plis">
+    <mongodb:createCollection collectionName="users">
+        <mongodb:options>
+            {
+                validator: {
+                    $jsonSchema: {
+                        bsonType: "object",
+                        required: ["email", "password", "roles", "username"],
+                        properties: {
+                            email: {
+                                bsonType: "string"
+                            },
+                            password: {
+                                bsonType: "string"
+                            },
+                            roles: {
+                                bsonType: "array"
+                            },
+                            username: {
+                                bsonType: "string"
+                            }
+                        }
+                    }
+                },
+                validationAction: "warn",
+                validationLevel: "strict"
+            }
+        </mongodb:options>
+    </mongodb:createCollection>
+    <mongodb:createCollection collectionName="categories">
+        <mongodb:options>
+            {
+                validator: {
+                    $jsonSchema: {
+                        bsonType: "object",
+                        required: ["name", "users"],
+                        properties: {
+                            name: {
+                                bsonType: "string"
+                            },
+                            users: {
+                                bsonType: "array"
+                                items: {
+                                    bsonType: "objectId"
+                                }
+                            }
+                        }
+                    }
+                },
+                validationAction: "warn",
+                validationLevel: "strict"
+            }
+        </mongodb:options>
+    </mongodb:createCollection>
+    <mongodb:createCollection collectionName="expenses">
+        <mongodb:options>
+            {
+                validator: {
+                    $jsonSchema: {
+                        bsonType: "object",
+                        required: ["category", "price", "user", "date"],
+                        properties: {
+                            category: {
+                                bsonType: "objectId"
+                            },
+                            price: {
+                                bsonType: "decimal128"
+                            },
+                            user: {
+                                bsonType: "array"
+                                items: {
+                                    bsonType: "objectId"
+                                }
+                            },
+                            date: {
+                                bsonType: "string"
+                            }
+                        }
+                    }
+                },
+                validationAction: "warn",
+                validationLevel: "strict"
+            }
+        </mongodb:options>
+    </mongodb:createCollection>
+    <mongodb:createCollection collectionName="incomes">
+        <mongodb:options>
+            {
+                validator: {
+                    $jsonSchema: {
+                        bsonType: "object",
+                        required: ["amount", "date", "user"],
+                        properties: {
+                            amount: {
+                                bsonType: "string"
+                            },
+                            date {
+                                bsonType: "decimal128"
+                            },
+                            user: {
+                                bsonType: "array"
+                                items: {
+                                    bsonType: "objectId"
+                                }
+                            },
+                            description: {
+                                bsonType: "string"
+                            }
+                        }
+                    }
+                },
+                validationAction: "warn",
+                validationLevel: "strict"
+            }
+        </mongodb:options>
+    </mongodb:createCollection>
+    <mongodb:createCollection collectionName="reports">
+        <mongodb:options>
+            {
+                validator: {
+                    $jsonSchema: {
+                        bsonType: "object",
+                        required: ["name", "subscribers"],
+                        properties: {
+                            name: {
+                                bsonType: "string"
+                            },
+                            subscribers: {
+                                bsonType: "array"
+                                items: {
+                                    bsonType: "objectId"
+                                }
+                            }
+                        }
+                    }
+                },
+                validationAction: "warn",
+                validationLevel: "strict"
+            }
+        </mongodb:options>
+    </mongodb:createCollection>
+</changeSet>
+</databaseChangeLog>
