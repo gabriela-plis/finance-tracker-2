@@ -73,7 +73,7 @@
                                 bsonType: "objectId"
                             },
                             price: {
-                                bsonType: "decimal128"
+                                bsonType: "decimal"
                             },
                             user: {
                                 bsonType: "array"
@@ -103,8 +103,8 @@
                             amount: {
                                 bsonType: "string"
                             },
-                            date {
-                                bsonType: "decimal128"
+                            date: {
+                                bsonType: "decimal"
                             },
                             user: {
                                 bsonType: "array"

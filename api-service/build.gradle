@@ -1,6 +1,5 @@
 plugins {
 	id 'java'
-	id 'org.liquibase.gradle' version '2.2.1'
 	id 'org.springframework.boot' version '3.1.0'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'groovy'
@@ -37,10 +36,6 @@ dependencies {
 	implementation 'org.projectlombok:lombok:1.18.20'
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-	implementation 'org.mongodb:mongodb-driver-core:5.0.0'
-	implementation 'org.mongodb:mongodb-driver-sync:5.0.0'
-	implementation 'org.mongodb:bson:4.1.1'
-	implementation 'org.liquibase.ext:liquibase-mongodb:4.3.2'
 
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
@@ -55,36 +50,6 @@ dependencies {
 	testImplementation 'org.testcontainers:spock:1.18.1'
 	testImplementation 'org.testcontainers:mongodb:1.18.3'
 	testImplementation 'org.testcontainers:rabbitmq:1.19.0'
-
-	liquibaseRuntime 'org.liquibase:liquibase-core:4.26.0'
-	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:3.0.3'
-	liquibaseRuntime 'info.picocli:picocli:4.7.5'
-	liquibaseRuntime 'org.yaml:snakeyaml:1.33'
-	liquibaseRuntime 'org.liquibase.ext:liquibase-mongodb:4.24.0'
-
-}
-
-liquibase {
-	def props = new Properties()
-	file("src/main/resources/liquibase/liquibase.properties").withDataInputStream {
-		props.load(it)
-	}
-
-	task printProps {
-		doFirst {
-			printIn props.getProperty('driver')
-		}
-	}
-
-	activities {
-		main {
-			changelogFile props.getProperty('changelogFile')
-			url props.getProperty('url')
-			username props.getProperty('username')
-			password props.getProperty('password')
-			driver props.getProperty("driver")
-		}
-	}
 }
 
 test {
