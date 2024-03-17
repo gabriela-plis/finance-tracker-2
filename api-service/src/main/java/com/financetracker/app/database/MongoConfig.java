@@ -3,9 +3,13 @@ package com.financetracker.app.database;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
+import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
 import java.util.List;
@@ -36,5 +40,12 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         );
 
         return new MongoCustomConversions(converters);
+    }
+
+    @Primary
+    @Bean
+    public MappingMongoConverter customMappingMongoConverter(MappingMongoConverter mappingMongoConverter) {
+        mappingMongoConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
+        return mappingMongoConverter;
     }
 }
