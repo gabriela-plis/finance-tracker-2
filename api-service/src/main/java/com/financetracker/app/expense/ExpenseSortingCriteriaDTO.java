@@ -5,6 +5,7 @@ import com.financetracker.app.utils.validation.numbers.ValidNumberRange;
 import jakarta.validation.constraints.Min;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.beans.ConstructorProperties;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,4 +26,13 @@ public record ExpenseSortingCriteriaDTO(
     BigDecimal priceMax,
 
     List<String> categoryIds
-) { }
+) {
+    @ConstructorProperties({"date-min", "date-max", "price-min", "price-max", "category-ids"})
+    public ExpenseSortingCriteriaDTO(LocalDate dateMin, LocalDate dateMax, BigDecimal priceMin, BigDecimal priceMax, List<String> categoryIds) {
+        this.dateMin = dateMin;
+        this.dateMax = dateMax;
+        this.priceMin = priceMin;
+        this.priceMax = priceMax;
+        this.categoryIds = categoryIds;
+    }
+}
