@@ -1,7 +1,7 @@
 package com.financetracker.app.expense;
 
+import com.financetracker.app.expense.repositories.ExpenseRepository;
 import com.financetracker.app.user.UserService;
-import com.financetracker.app.utils.converter.StringListToObjectIdListConverter;
 import com.financetracker.app.utils.exception.custom.DocumentNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,6 @@ public class ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final ExpenseMapper expenseMapper;
     private final UserService userService;
-    private final StringListToObjectIdListConverter converter;
 
     public Page<Expense> getUserExpenses(String userId, Pageable pageable) {
         return expenseRepository.findExpensesByUserId(userId, pageable);
@@ -27,14 +26,7 @@ public class ExpenseService {
     }
 
     public Page<Expense> getUserSortedExpenses(String userId, ExpenseSortingCriteriaDTO criteria, Pageable pageable) {
-        Page<Expense> expenses;
-        if (criteria.categoryIds() == null) {
-            expenses = expenseRepository.findExpensesByUserIdAndDateBetweenAndPriceBetween(userId, criteria.dateMin(), criteria.dateMax(), criteria.priceMin(), criteria.priceMax(), pageable);
-        } else {
-            expenses = expenseRepository.findExpensesByUserIdAndDateBetweenAndPriceBetweenAndCategoryIdIn(userId, criteria.dateMin(), criteria.dateMax(), criteria.priceMin(), criteria.priceMax(), converter.convert(criteria.categoryIds()), pageable);
-        }
-
-        return expenses;
+        return expenseRepository.findExpensesBySortingCriteria(userId, criteria.dateMin(), criteria.dateMax(), criteria.priceMin(), criteria.priceMax(), criteria.categoryIds(), pageable);
     }
 
     public void createExpense(String userId, AddExpenseDTO expenseToAdd) {

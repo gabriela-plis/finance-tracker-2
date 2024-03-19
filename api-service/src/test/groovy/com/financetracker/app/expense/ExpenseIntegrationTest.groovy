@@ -3,6 +3,7 @@ package com.financetracker.app.expense
 import com.financetracker.app.category.Category
 import com.financetracker.app.category.CategoryRepository
 import com.financetracker.app.config.IntegrationTestConfig
+import com.financetracker.app.expense.repositories.ExpenseRepository
 import com.financetracker.app.security.authentication.CustomUserDetails
 import com.financetracker.app.security.authorization.Role
 import com.financetracker.app.user.User

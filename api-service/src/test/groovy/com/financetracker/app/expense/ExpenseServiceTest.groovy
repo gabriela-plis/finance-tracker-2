@@ -4,6 +4,7 @@ package com.financetracker.app.expense
 import com.financetracker.app.category.Category
 import com.financetracker.app.category.CategoryDTO
 import com.financetracker.app.category.CategoryMapper
+import com.financetracker.app.expense.repositories.ExpenseRepository
 import com.financetracker.app.security.authorization.Role
 import com.financetracker.app.user.User
 import com.financetracker.app.user.UserService
