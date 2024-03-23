@@ -27,9 +27,8 @@ class ExpenseServiceTest extends Specification {
     }
     ExpenseRepository expenseRepository = Mock()
     UserService userService = Mock()
-    StringListToObjectIdListConverter converter = Mock()
 
-    ExpenseService expenseService = new ExpenseService(expenseRepository, expenseMapper, userService, converter)
+    ExpenseService expenseService = new ExpenseService(expenseRepository, expenseMapper, userService)
 
     def "should get all user expenses"() {
         given:
@@ -76,7 +75,7 @@ class ExpenseServiceTest extends Specification {
         thrown(DocumentNotFoundException)
     }
 
-    def "should get user sorted expenses - with category ids criterium"() {
+    def "should get user sorted expenses"() {
         given:
         String userId = "1"
         PageRequest pageable = PageRequest.of(0, 5)
@@ -86,23 +85,7 @@ class ExpenseServiceTest extends Specification {
         Page<Expense> result = expenseService.getUserSortedExpenses(userId, sortingCriteria, pageable)
 
         then:
-        1 * expenseRepository.findExpensesByUserIdAndDateBetweenAndPriceBetweenAndCategoryIdIn(userId, sortingCriteria.dateMin(), sortingCriteria.dateMax(), sortingCriteria.priceMin(), sortingCriteria.priceMax(), converter.convert(sortingCriteria.categoryIds()), pageable) >> getPagedExpenses()
-
-        and:
-        result == getPagedExpenses()
-    }
-
-    def "should get user sorted expenses - without category ids criterium"() {
-        given:
-        String userId = "1"
-        PageRequest pageable = PageRequest.of(0, 5)
-        ExpenseSortingCriteriaDTO sortingCriteria = new ExpenseSortingCriteriaDTO(LocalDate.of(2020, 1, 1), LocalDate.of(2022, 1, 1), BigDecimal.valueOf(50), BigDecimal.valueOf(300), null)
-
-        when:
-        Page<Expense> result = expenseService.getUserSortedExpenses(userId, sortingCriteria, pageable)
-
-        then:
-        1 * expenseRepository.findExpensesByUserIdAndDateBetweenAndPriceBetween(userId, sortingCriteria.dateMin(), sortingCriteria.dateMax(), sortingCriteria.priceMin(), sortingCriteria.priceMax(), pageable) >> getPagedExpenses()
+        1 * expenseRepository.findExpensesBySortingCriteria(userId, sortingCriteria.dateMin(), sortingCriteria.dateMax(), sortingCriteria.priceMin(), sortingCriteria.priceMax(), sortingCriteria.categoryIds(), pageable) >> getPagedExpenses()
 
         and:
         result == getPagedExpenses()
