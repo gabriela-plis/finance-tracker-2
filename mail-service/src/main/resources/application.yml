@@ -4,10 +4,10 @@ spring:
     exchange: mail-service.mail.ex
     routing-key: mail.send
   mail:
-    host: smtp.gmail.com
-    port: 587
+    host: localhost
+    port: 3025
     username: finance.tracker3@gmail.com
-    password: 'ecypeltlquimjqse'
+    password: 'abc'
     properties.mail.smtp:
       auth: true
       starttls.enable: true

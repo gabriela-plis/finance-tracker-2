@@ -5,6 +5,7 @@ services:
     image: greenmail/standalone:1.6.5
     environment:
       - JAVA_OPTS=-Dgreenmail.verbose
+      - GREENMAIL_USERS=fakemail@example.com:password
     ports:
       - 3025:3025 # SMTP
       - 3110:3110 # POP3
@@ -14,14 +15,13 @@ services:
       - 3995:3995 # POP3S
       - 8080:8080 # API
 
-  roundcube:
-    image: roundcube/roundcubemail:latest
+  thunderbird:
+    image: jlesage/thunderbird:latest
+    ports:
+      - "5800:5800"  # VNC server port (for GUI access)
+    environment:
+      - DISPLAY=:0  # Required for GUI applications in Docker
     depends_on:
       - greenmail
-    ports:
-      - 8000:80
-    environment:
-      - ROUNDCUBEMAIL_DEFAULT_HOST=greenmail  # IMAP server - tls:// prefix for STARTTLS, ssl:// for SSL/TLS
-      - ROUNDCUBEMAIL_DEFAULT_PORT=3143       # IMAP port
-      - ROUNDCUBEMAIL_SMTP_SERVER=greenmail   # SMTP server - tls:// prefix for STARTTLS, ssl:// for SSL/TLS
-      - ROUNDCUBEMAIL_SMTP_PORT=3025          # SMTP port
+    links:
+      - greenmail:greenmail
