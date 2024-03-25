@@ -30,7 +30,11 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testImplementation 'org.mockito:mockito-core'
+    testImplementation 'com.icegreen:greenmail:2.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.3'
+    testImplementation 'org.testcontainers:rabbitmq:1.19.0'
+
 }
 
 test {
