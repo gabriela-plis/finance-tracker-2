@@ -10,29 +10,29 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@ValidDateInterval(startDateField = "dateMin", endDateField = "dateMax")
-@ValidNumberRange(startNumberField = "priceMin", endNumberField = "priceMax")
+@ValidDateInterval(startDateField = "minDate", endDateField = "maxDate")
+@ValidNumberRange(startNumberField = "minPrice", endNumberField = "maxPrice")
 public record ExpenseSortingCriteriaDTO(
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate dateMin,
+    LocalDate minDate,
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate dateMax,
+    LocalDate maxDate,
 
     @Min(0)
-    BigDecimal priceMin,
+    BigDecimal minPrice,
 
     @Min(0)
-    BigDecimal priceMax,
+    BigDecimal maxPrice,
 
     List<String> categoryIds
 ) {
-    @ConstructorProperties({"date-min", "date-max", "price-min", "price-max", "category-ids"})
-    public ExpenseSortingCriteriaDTO(LocalDate dateMin, LocalDate dateMax, BigDecimal priceMin, BigDecimal priceMax, List<String> categoryIds) {
-        this.dateMin = dateMin;
-        this.dateMax = dateMax;
-        this.priceMin = priceMin;
-        this.priceMax = priceMax;
+    @ConstructorProperties({"min-date", "max-date", "min-price", "max-price", "category-ids"})
+    public ExpenseSortingCriteriaDTO(LocalDate minDate, LocalDate maxDate, BigDecimal minPrice, BigDecimal maxPrice, List<String> categoryIds) {
+        this.minDate = minDate;
+        this.maxDate = maxDate;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
         this.categoryIds = categoryIds;
     }
 }

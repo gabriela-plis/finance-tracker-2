@@ -85,7 +85,7 @@ class ExpenseServiceTest extends Specification {
         Page<Expense> result = expenseService.getUserSortedExpenses(userId, sortingCriteria, pageable)
 
         then:
-        1 * expenseRepository.findExpensesBySortingCriteria(userId, sortingCriteria.dateMin(), sortingCriteria.dateMax(), sortingCriteria.priceMin(), sortingCriteria.priceMax(), sortingCriteria.categoryIds(), pageable) >> getPagedExpenses()
+        1 * expenseRepository.findExpensesBySortingCriteria(userId, sortingCriteria.minDate(), sortingCriteria.maxDate(), sortingCriteria.minPrice(), sortingCriteria.maxPrice(), sortingCriteria.categoryIds(), pageable) >> getPagedExpenses()
 
         and:
         result == getPagedExpenses()

@@ -76,7 +76,7 @@ class IncomeServiceTest extends Specification {
         Page<Income> result = incomeService.getUserSortedIncomes(userId, sortingCriteria, pageable)
 
         then:
-        1 * incomeRepository.findIncomesByUserIdAndDateBetweenAndAmountBetweenAndDescriptionContainingIgnoreCase(userId, sortingCriteria.dateMin(), sortingCriteria.dateMax(), sortingCriteria.amountMin(), sortingCriteria.amountMax(), sortingCriteria.keyword(), pageable) >> getPagedIncomes()
+        1 * incomeRepository.findIncomesByUserIdAndDateBetweenAndAmountBetweenAndDescriptionContainingIgnoreCase(userId, sortingCriteria.minDate(), sortingCriteria.maxDate(), sortingCriteria.minAmount(), sortingCriteria.maxAmount(), sortingCriteria.keyword(), pageable) >> getPagedIncomes()
 
         and:
         result == getPagedIncomes()

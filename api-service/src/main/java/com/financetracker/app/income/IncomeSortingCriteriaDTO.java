@@ -9,20 +9,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@ValidDateInterval(startDateField = "dateMin", endDateField = "dateMax")
-@ValidNumberRange(startNumberField = "amountMin", endNumberField = "amountMax")
+@ValidDateInterval(startDateField = "minDate", endDateField = "maxDate")
+@ValidNumberRange(startNumberField = "minAmount", endNumberField = "maxAmount")
 public record IncomeSortingCriteriaDTO(
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate dateMin,
+    LocalDate minDate,
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate dateMax,
+    LocalDate maxDate,
 
     @Min(0)
-    BigDecimal amountMin,
+    BigDecimal minAmount,
 
     @Min(0)
-    BigDecimal amountMax,
+    BigDecimal maxAmount,
 
     @Size(max = 64, message = "Exceeded maximum length for the keyword")
     String keyword

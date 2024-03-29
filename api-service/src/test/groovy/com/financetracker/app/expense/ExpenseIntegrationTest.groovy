@@ -135,11 +135,11 @@ class ExpenseIntegrationTest extends IntegrationTestConfig {
         when:
         def result = mvc
             .perform(get("/users/me/expenses")
-                .param("dateMin", "2019-01-01")
-                .param("dateMax", "2022-01-01")
-                .param("priceMin", "10")
-                .param("priceMax", "150")
-                .param("categoryIds", "1", "2")
+                .param(minDate, "2019-01-01")
+                .param(maxDate, "2022-01-01")
+                .param(minPrice, "10")
+                .param(maxDate, "150")
+                .param(categoryIds, "1", "2")
                 .with(user(userDetails)))
             .andDo(print())
 
@@ -158,6 +158,13 @@ class ExpenseIntegrationTest extends IntegrationTestConfig {
         result.andExpect(jsonPath('$.expenses[1].category.id').value("2"))
         result.andExpect(jsonPath('$.expenses[1].category.name').value("Healthcare"))
         result.andExpect(jsonPath('$.expenses[1].price').value(20.22))
+
+        where:
+        minDate << ["minDate", "min-date"]
+        maxDate << ["maxDate", "max-date"]
+        minPrice << ["minPrice", "min-price"]
+        maxPrice << ["maxPrice", "max-price"]
+        categoryIds << ["categoryIds", "category-ids"]
     }
 
     def "should return 201 (CREATED) when expense is created"() {

@@ -67,28 +67,28 @@ public class ExpenseRepositoryImpl implements CustomExpenseRepository {
 
         private static final StringListToObjectIdListConverter converter = new StringListToObjectIdListConverter();
 
-        public static CriteriaDefinition ifDateBetween(LocalDate dateMin, LocalDate dateMax, String field) {
-            return Criteria.where(field).gte(dateMin).lte(dateMax);
+        public static CriteriaDefinition ifDateBetween(LocalDate minDate, LocalDate maxDate, String field) {
+            return Criteria.where(field).gte(minDate).lte(maxDate);
         }
 
-        public static CriteriaDefinition ifDateFrom(LocalDate dateMin, String field) {
-            return Criteria.where(field).gte(dateMin);
+        public static CriteriaDefinition ifDateFrom(LocalDate minDate, String field) {
+            return Criteria.where(field).gte(minDate);
         }
 
-        public static CriteriaDefinition ifDateTo(LocalDate dateMax, String field) {
-            return Criteria.where(field).lte(dateMax);
+        public static CriteriaDefinition ifDateTo(LocalDate maxDate, String field) {
+            return Criteria.where(field).lte(maxDate);
         }
 
-        public static CriteriaDefinition ifPriceBetween(BigDecimal priceMin, BigDecimal priceMax, String field) {
-            return Criteria.where(field).gte(priceMin).lte(priceMax);
+        public static CriteriaDefinition ifPriceBetween(BigDecimal minPrice, BigDecimal maxPrice, String field) {
+            return Criteria.where(field).gte(minPrice).lte(maxPrice);
         }
 
-        public static CriteriaDefinition ifPriceFrom(BigDecimal priceMin, String field) {
-            return Criteria.where(field).gte(priceMin);
+        public static CriteriaDefinition ifPriceFrom(BigDecimal minPrice, String field) {
+            return Criteria.where(field).gte(minPrice);
         }
 
-        public static CriteriaDefinition ifPriceTo(BigDecimal priceMax, String field) {
-            return Criteria.where(field).lte(priceMax);
+        public static CriteriaDefinition ifPriceTo(BigDecimal maxPrice, String field) {
+            return Criteria.where(field).lte(maxPrice);
         }
 
         public static CriteriaDefinition ifIdIn(List<String> ids, String field) {

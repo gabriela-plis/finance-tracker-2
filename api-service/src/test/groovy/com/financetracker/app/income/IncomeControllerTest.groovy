@@ -120,10 +120,10 @@ class IncomeControllerTest extends MvcTestsConfig {
         when:
         def result = mvc
             .perform(get("/users/me/incomes")
-                .param("dateMin", "2019-01-01")
-                .param("dateMax", "2022-01-01")
-                .param("amountMin", "20")
-                .param("amountMax", "150")
+                .param(minDate, "2019-01-01")
+                .param(maxDate, "2022-01-01")
+                .param(minAmount, "20")
+                .param(maxAmount, "150")
                 .param("keyword", "income"))
             .andDo(print())
 
@@ -145,6 +145,12 @@ class IncomeControllerTest extends MvcTestsConfig {
         result.andExpect(jsonPath('$.incomes[1].date').value("2021-12-15"))
         result.andExpect(jsonPath('$.incomes[1].amount').value(20.22))
         result.andExpect(jsonPath('$.incomes[1].description').value("income2"))
+
+        where:
+        minDate << ["minDate", "min-date"]
+        maxDate << ["maxDate", "max-date"]
+        minAmount << ["minAmount", "min-amount"]
+        maxAmount << ["maxAmount", "max-amount"]
     }
 
     def "should return 201 (CREATED) when income is created"() {

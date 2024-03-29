@@ -26,7 +26,7 @@ public class ExpenseService {
     }
 
     public Page<Expense> getUserSortedExpenses(String userId, ExpenseSortingCriteriaDTO criteria, Pageable pageable) {
-        return expenseRepository.findExpensesBySortingCriteria(userId, criteria.dateMin(), criteria.dateMax(), criteria.priceMin(), criteria.priceMax(), criteria.categoryIds(), pageable);
+        return expenseRepository.findExpensesBySortingCriteria(userId, criteria.minDate(), criteria.maxDate(), criteria.minPrice(), criteria.maxPrice(), criteria.categoryIds(), pageable);
     }
 
     public void createExpense(String userId, AddExpenseDTO expenseToAdd) {

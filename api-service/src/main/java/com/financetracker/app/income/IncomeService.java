@@ -25,7 +25,7 @@ public class IncomeService {
     }
 
     public Page<Income> getUserSortedIncomes(String userId, IncomeSortingCriteriaDTO criteria, Pageable pageable) {
-        return incomeRepository.findIncomesByUserIdAndDateBetweenAndAmountBetweenAndDescriptionContainingIgnoreCase(userId, criteria.dateMin(), criteria.dateMax(), criteria.amountMin(), criteria.amountMax(), criteria.keyword(), pageable);
+        return incomeRepository.findIncomesByUserIdAndDateBetweenAndAmountBetweenAndDescriptionContainingIgnoreCase(userId, criteria.minDate(), criteria.maxDate(), criteria.minAmount(), criteria.maxAmount(), criteria.keyword(), pageable);
     }
 
     public void createIncome(String userId, AddIncomeDTO incomeToAdd) {
