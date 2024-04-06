@@ -1,5 +1,6 @@
 package com.financetracker.app.security.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.financetracker.app.security.authentication.CustomUserDetailsService;
 import com.financetracker.app.security.authentication.JwtAuthenticationFilter;
 import com.financetracker.app.security.authentication.JwtService;
@@ -31,6 +32,7 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
     private final JwtService jwtService;
+    private final ObjectMapper objectMapper;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -85,7 +87,7 @@ public class SecurityConfig {
     }
 
     private JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(userDetailsService, jwtService);
+        return new JwtAuthenticationFilter(userDetailsService, jwtService, objectMapper);
     }
 
 }
