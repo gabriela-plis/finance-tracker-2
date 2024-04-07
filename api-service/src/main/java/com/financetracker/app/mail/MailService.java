@@ -5,13 +5,17 @@ import com.financetracker.api.mail.Template;
 import com.financetracker.app.rabbitmq.QueueSender;
 import com.financetracker.app.user.User;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
+@Getter
+@Setter
 public class MailService {
 
     private final QueueSender queueSender;
