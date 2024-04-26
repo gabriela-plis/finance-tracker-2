@@ -29,6 +29,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     testImplementation 'org.assertj:assertj-core:3.25.3'
+    testImplementation 'com.icegreen:greenmail-junit5:2.0.1'
+    testImplementation 'org.testcontainers:testcontainers:1.19.7'
+    testImplementation 'org.testcontainers:rabbitmq:1.19.7'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

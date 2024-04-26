@@ -1,0 +1,12 @@
+spring:
+  rabbitmq:
+    queue: mail-service.mail.send
+    exchange: mail-service.mail.ex
+    routing-key: mail.send
+  mail:
+    password: password
+    username: example@mail.com
+    host: 127.0.0.1
+    port: 3025
+    protocol: smtp
+    test-connection: true
