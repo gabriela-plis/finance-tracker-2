@@ -13,7 +13,7 @@ import org.thymeleaf.context.Context;
 import java.util.Map;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class MailCreatorTest {
@@ -36,10 +36,10 @@ public class MailCreatorTest {
         MimeMessage result = mailCreator.createMailToSend(mail);
 
 //        then
-        assertEquals(1, result.getAllRecipients().length);
-        assertEquals("anne@gmail.com", result.getAllRecipients()[0].toString());
-        assertEquals("sender@gmail.com", result.getFrom()[0].toString());
-        assertEquals("Message subject", result.getSubject());
+        assertThat(result.getAllRecipients()).hasSize(1);
+        assertThat(result.getAllRecipients()[0].toString()).isEqualTo("anne@gmail.com");
+        assertThat(result.getFrom()[0].toString()).isEqualTo("sender@gmail.com");
+        assertThat(result.getSubject()).isEqualTo("Message subject");
     }
 
     private MailDTO getMail() {
@@ -50,6 +50,4 @@ public class MailCreatorTest {
         Session session = Session.getDefaultInstance(new Properties());
         return new MimeMessage(session);
     }
-
-
 }
