@@ -1,6 +1,7 @@
 package com.financetracker.app.mailservice.rabbitmq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -13,25 +14,26 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
+@RequiredArgsConstructor
 public class RabbitMQConfig {
 
     @Value("${spring.rabbitmq.queue}")
-    private String queueName;
+    private final String QUEUE_NAME;
 
     @Value("${spring.rabbitmq.exchange}")
-    private String exchangeName;
+    private final String EXCHANGE_NAME;
 
     @Value("${spring.rabbitmq.routing-key}")
-    private String routingKey;
+    private final String ROUTING_KEY;
 
     @Bean
     public Queue queue() {
-        return new Queue(queueName, false);
+        return new Queue(QUEUE_NAME, false);
     }
 
     @Bean
     public DirectExchange exchange() {
-        return new DirectExchange(exchangeName);
+        return new DirectExchange(EXCHANGE_NAME);
     }
 
     @Bean
@@ -39,12 +41,13 @@ public class RabbitMQConfig {
         return BindingBuilder
             .bind(queue)
             .to(exchange)
-            .with(routingKey);
+            .with(ROUTING_KEY);
     }
 
     @Bean
     public MessageConverter jsonMessageConverter() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
         return new Jackson2JsonMessageConverter(objectMapper);
     }
 }
