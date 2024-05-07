@@ -9,7 +9,7 @@
     <body>
         <h1 style="font-size:16px" th:utext=" 'Hi ' + ${user.username} + '!' ">Hi!</h1>
         <p>It's your monthly financial report</p>
-        <p th:utext=" 'Date: ' + ${dateInterval.startDate[0]} + '.' + ${dateInterval.startDate[1]} + '.' + ${dateInterval.startDate[2]} +  ' - '  + ${dateInterval.endDate[0]} + '.' + ${dateInterval.endDate[1]} + '.' + ${dateInterval.endDate[2]}"></p>
+        <p th:utext=" 'Date: ' + ${dateInterval.startDate[2]} + '.' + ${dateInterval.startDate[1]} + '.' + ${dateInterval.startDate[0]} +  ' - '  + ${dateInterval.endDate[2]} + '.' + ${dateInterval.endDate[1]} + '.' + ${dateInterval.endDate[0]}"></p>
         <table class='table table-striped' style="width: 410px; margin-bottom: 20px; border-collapse: collapse; background-color: #fae1dd">
             <caption>Expense Summary</caption>
             <tr>
@@ -22,11 +22,11 @@
             </tr>
             <tr>
                 <td th:attr="style='border: 1px solid grey; padding: 8px; background-color: #fcd5ce; width: 110px'">Largest spend</td>
-                <td th:attr="style='border: 1px solid grey; padding: 8px;'" th:utext="'date: ' + ${largestExpense.date[0]} + '.' + ${largestExpense.date[1]} + '.' + ${largestExpense.date[2]} + ' price: ' + ${largestExpense.price} + ' category: ' + ${largestExpense.category.name}"></td>
+                <td th:attr="style='border: 1px solid grey; padding: 8px;'" th:utext="'date: ' + ${largestExpense.date[2]} + '.' + ${largestExpense.date[1]} + '.' + ${largestExpense.date[0]} + ' price: ' + ${largestExpense.price} + ' category: ' + ${largestExpense.category.name}"></td>
             </tr>
             <tr>
                 <td th:attr="style='border: 1px solid grey; padding: 8px; background-color: #fcd5ce; width: 110px'">Highest average spend week</td>
-                <td th:attr="style='border: 1px solid grey; padding: 8px;'" th:utext="${weekWithHighestAverageExpense}"></td>
+                <td th:attr="style='border: 1px solid grey; padding: 8px;'" th:utext="${weekWithHighestAverageExpense.startDate[2]} + '.' + ${weekWithHighestAverageExpense.startDate[1]} + '.' + ${weekWithHighestAverageExpense.startDate[0]} +  ' - '  + ${weekWithHighestAverageExpense.endDate[2]} + '.' + ${weekWithHighestAverageExpense.endDate[1]} + '.' + ${weekWithHighestAverageExpense.endDate[0]}"></td>
             </tr>
             <tr>
                 <td th:attr="style='border: 1px solid grey; padding: 8px; background-color: #fcd5ce; width: 110px'">Highest average spend day</td>
